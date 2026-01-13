@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Faztudo Langisse - Engenheiro & Mestre em TI</title>
+    <style>
+        :root {
+            --primary: #311B92;      /* Roxo Profundo Profissional */
+            --accent: #6200EE;       /* Roxo Moderno */
+            --whatsapp: #128C7E;     /* Verde WhatsApp Business */
+            --bg: #FFFFFF;           
+            --card-bg: #F8F9FD;      
+            --text-main: #1A1A1B;    
+            --text-sub: #474747;     
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 10px 30px rgba(49, 27, 146, 0.15);
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.4);
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 { margin: 0; font-size: 1.7rem; font-weight: 700; }
+        .header-sub { font-size: 0.85rem; opacity: 0.9; margin-top: 10px; font-weight: 300; text-transform: uppercase; letter-spacing: 1.5px; }
+
+        .content {
+            padding: 30px 20px 120px 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .section {
+            display: none;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .section.active {
+            display: block;
+            animation: cubic-bezier(0.4, 0, 0.2, 1) 0.5s fadeIn;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h3 { color: var(--primary); margin-top: 0; font-size: 1.4rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+        .work-list { padding: 0; list-style: none; margin: 0; }
+        .work-list li {
+            margin-bottom: 18px;
+            padding-left: 32px;
+            position: relative;
+            color: var(--text-main);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .work-list li::before {
+            content: "✓";
+            position: absolute; left: 0;
+            color: var(--accent);
+            font-weight: 900;
+        }
+
+        /* ESTILO DOS BOTÕES MELHORADO */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            margin: 15px 0;
+            text-decoration: none;
+            border-radius: 18px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:active { transform: scale(0.95); }
+
+        .btn-outline { background: white; border: 2px solid var(--accent); color: var(--accent); }
+        .btn-email { background: var(--accent); color: white; box-shadow: 0 4px 12px rgba(98, 0, 238, 0.2); }
+        .btn-whatsapp { background: var(--whatsapp); color: white; box-shadow: 0 4px 12px rgba(18, 140, 126, 0.2); }
+
+        .contact-info { background: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid #edf0f5; }
+        .contact-info p { margin: 8px 0; font-size: 0.95rem; color: var(--text-sub); display: flex; justify-content: space-between; }
+        .contact-info b { color: var(--text-main); }
+
+        /* NAVEGAÇÃO PREMIUM */
+        nav {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 25px 10px;
+            position: fixed;
+            bottom: 0; width: 100%;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.06);
+            z-index: 10000;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        nav button {
+            background: none; border: none; color: #A0A0A0;
+            font-size: 10px; display: flex; flex-direction: column;
+            align-items: center; gap: 6px; flex: 1;
+            transition: 0.3s;
+        }
+
+        nav button.active-btn { color: var(--primary); transform: translateY(-3px); }
+        nav button.active-btn span { background: rgba(98, 0, 238, 0.1); border-radius: 12px; padding: 4px 12px; }
+        nav button span { font-size: 1.4rem; transition: 0.3s; }
+        
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .gallery-item img { width: 100%; height: 140px; object-fit: cover; border-radius: 20px; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        @media (min-width: 600px) {
+            .content { padding-top: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://i.imgur.com/iu3Wh24.png" alt="Faztudo Langisse" class="profile-img">
+        <h2>Faztudo Langisse</h2>
+        <div class="header-sub">Engenheiro & Mestre em TI</div>
+    </header>
+
+    <div class="content">
+        <div id="home" class="section active">
+            <h3>👋 Olá</h3>
+            <p>Seja bem-vindo à minha Web Page! Sou apaixonado por Tecnologias e focado em entregar soluções de alta qualidade na área de Sistemas Informáticos.
+               Navegue pelos menus abaixo para me conheceres.</p>
+        </div>
+
+        <div id="about" class="section">
+            <h3>👤 Perfil</h3>
+            <p>Engenheiro em Informática e Telecomunicações com Mestrado em Tecnologias de Informação. 
+               Atuo na intersecção entre a Academia e o mercado de Ciências de Computação.</p>
+        </div>
+
+        <div id="work" class="section">
+            <h3>💼 Atuação</h3>
+            <ul class="work-list">
+                <li>Docente Universitário</li>
+                <li>Gestor de Projetos Informáticos</li>
+                <li>Consultoria em Projetos de Softwares e de Inteligência Artificial</li>
+            </ul>
+        </div>
+
+        <div id="links" class="section">
+            <h3>🔗 Links Úteis</h3>
+            <div class="contact-info">
+                <p>Mcel <b>+258 825444550</b></p>
+                <p>Vodacom <b>+258 845444550</b></p>
+                <p>Movitel <b>+258 869444550</b></p>
+            </div>
+            <a href="https://wa.me/258825444550" class="btn btn-outline" target="_blank">Abrir WhatsApp (82)</a>
+        </div>
+
+        <div id="gallery" class="section">
+            <h3>📸 Projetos & Momentos</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://i.imgur.com/JWMZelj.png"></div>
+                <div class="gallery-item"><img src="https://i.imgur.com/I0B7mLp.png"></div>
+                <div class="gallery-item"><img src="https://i.imgur.com/3RTHTTH.png"></div>
+                <div class="gallery-item"><img src="https://i.imgur.com/eig2Oew.png"></div>
+                <div class="gallery-item"><img src="https://i.imgur.com/LbPHsxH.jpeg"></div>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h3>✉️ Contacto Direto</h3>
+            <p>Estou disponível para novas parcerias e projetos desafiadores na área de Computação.</p>
+            
+            <div class="contact-info">
+                <p>Email: <b>langissef4@gmail.com</b></p>
+            </div>
+
+            <a href="https://wa.me/258825444550?text=Olá%20Eng.%20Faztudo,%20vi%20o%20seu%20portfólio%20e%20gostaria%20de%20conversar." 
+               class="btn btn-whatsapp" target="_blank">
+               💬 WhatsApp Direto
+            </a>
+
+            <a href="mailto:langissef4@gmail.com?subject=Contacto%20via%20Portfólio&body=Olá%20Eng.%20Faztudo," 
+               class="btn btn-email">
+               📬 Enviar E-mail
+            </a>
+        </div>
+    </div>
+
+    <nav>
+        <button onclick="openTab('home', this)" class="active-btn"><span>🏠</span>Início</button>
+        <button onclick="openTab('about', this)"><span>👤</span>Perfil</button>
+        <button onclick="openTab('work', this)"><span>💼</span>Trabalho</button>
+        <button onclick="openTab('links', this)"><span>🔗</span>Links</button>
+        <button onclick="openTab('gallery', this)"><span>📸</span>Fotos</button>
+        <button onclick="openTab('contact', this)"><span>✉️</span>Contacto</button>
+    </nav>
+
+    <script>
+        function openTab(tabName, btn) {
+            // Esconder todas as secções
+            var sections = document.getElementsByClassName("section");
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = "none";
+                sections[i].classList.remove("active");
+            }
+            // Remover estado ativo dos botões
+            var buttons = document.querySelectorAll("nav button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active-btn");
+            }
+            // Mostrar secção atual
+            var currentSection = document.getElementById(tabName);
+            currentSection.style.display = "block";
+            setTimeout(() => { currentSection.classList.add("active"); }, 10);
+            
+            // Ativar botão
+            btn.classList.add("active-btn");
+            
+            // Scroll suave para o topo
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
